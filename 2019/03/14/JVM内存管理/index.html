@@ -164,16 +164,50 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <blockquote>
-<p>Java内存模型（Java Memory Model）JMM，是一种符合内存模型规范的，屏蔽了各种硬件以及操作系统访问差异的，保证了Java程序在各种平台下对于内存的访问都能够保证效果一致的机制和规范。（jmm是jvm的一种规范，定义了jvm的内存模型。它屏蔽了各种硬件和操作系统的访问差异，不像c那样直接访问硬件内存，相对安全很多，它的主要目的是解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题。可以保证并发编程场景中的原子性、可见性和有序性。）</p>
-</blockquote>
-<p>JMM管理的内存分为5大数据区（运行时数据区）：</p>
-<h3 id="程序计数器："><a href="#程序计数器：" class="headerlink" title="程序计数器："></a>程序计数器：</h3><p>程序计数器是一块很小的内存空间，可以是线程私有的，可以看作为当先的行号指令器。这块内存区域是虚拟机中唯一一块没有OOM的区域。</p>
-<h3 id="Java栈（虚拟机栈）："><a href="#Java栈（虚拟机栈）：" class="headerlink" title="Java栈（虚拟机栈）："></a>Java栈（虚拟机栈）：</h3><p>线程私有的，栈描述的是Java方法的内存模型。每一个方法被执行的时候，都会创建出一个一个栈针来存储局部变量表，操作栈，动态链接，方法出口等信息。每一个方法的调用都是在虚拟机栈中从入栈到出栈的过程。<br>栈帧: 只用来存储数据和部分过程结果的数据结构<br>栈针的位置：内存 -&gt; 运行时数据区 -&gt; 某一个线程对应的虚拟机栈<br>栈针大小的确定：在编译时期确定，不受运行时数据的影响<br>平时所说的栈一般指的是局部变量表的部分。局部表量表：一片连续的内存空间，用来存放方法参数，以及方法内定义的局部变量。存放着编译器已知的数据类型（八大基本数据类型，对象引用（Reference类型），ReturnAddress类型）。他的最小的局部变量空间是Slot，虚拟机没有指明Slot的大小，但在jvm中，long和double类型数据明确规定为64位，这两个类型占2个Slot，其它基本类型固定占用1个Slot。<br>Reference类型：与基本类型不同的是，它不等同本身，即使是String，内部也是char数组实现，它可能是指向一个对象的起始位置的指针，也可能是指向对象的一个句柄或者是其他与该对象有关的位置<br>ReturnAddress类型：指向一条字节码的指令地址，<br>需要注意的是，局部变量表所需要的内存空间在编译期完成分配，当进入一个方法时，这个方法在栈中需要分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表大小。<br>Java虚拟机栈可能会出现的两种异常：<br>1.请求的栈深度大于虚拟机所允许的栈的深度，StackOverFlowError异常<br>2.虚拟机栈空间可以动态扩展，当动态扩展无法申请到足够的空间的时候，会报OutOfMemory异常</p>
-<h3 id="本地方法栈："><a href="#本地方法栈：" class="headerlink" title="本地方法栈："></a>本地方法栈：</h3><p>本地方法栈和Java虚拟机栈的职责类似，但是本地方法栈是用于调用虚拟机使用到的native方法，可能是底层调用到的c或c++代码。</p>
-<h3 id="堆（GC堆）："><a href="#堆（GC堆）：" class="headerlink" title="堆（GC堆）："></a>堆（GC堆）：</h3><p>堆是Jvm管理的内存中的占比最大的一块，是线程共享的，所以所线程执行的时候，也要注意同步机制。<br>Java虚拟机规范对于这一块的描述是：所有的对象实例及数组，都需要在堆上分配内存，</p>
-<h3 id="方法区："><a href="#方法区：" class="headerlink" title="方法区："></a>方法区：</h3><p>方法区同堆一样，也是线程共享的一块区域，为了区分堆，也称为非堆。用于存储已经被虚拟机加载的类信息，常量，静态变量。<br>运行时常量池：是方法区的一部分，class文件除了具有类的字段，接口，方法等描述信息之外，还有常量池用于存放编译器生成的各种字面量以及符号引用。</p>
-<p>jdk8真正开始废弃永久代，而使用元空间(Metaspace)</p>
+                <p>Java虚拟机在Java程序的执行过程中会把他所管理的内存划分成不同的内存区域。这些区域都有各自的用途，以及创建和销毁时间。有的区域是伴随着虚拟机的启动而存在，有的区域则是依赖用户线程的启动和结束而建立和销毁。<br><img src="/Users/wanghao/Library/Application Support/typora-user-images/image-20190416110537052.png" alt="image-20190416110537052"></p>
+<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><ul>
+<li>线程私有的内存区域，生命周期与线程相同</li>
+<li>可以看作是当前线程所执行的字节码的行号指示器</li>
+<li>在虚拟机的概念模型中，字节码解释器的工作就是通过改变这个计数器的值，选取下一条需要执行的字节码指令</li>
+<li>如果线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果线程执行的是一个native方法，这个计数器的值为空</li>
+<li>此区域是唯一一个不会发生OOM的区域</li>
+</ul>
+<h3 id="Java虚拟机栈（JVM-Stacks）"><a href="#Java虚拟机栈（JVM-Stacks）" class="headerlink" title="Java虚拟机栈（JVM Stacks）"></a>Java虚拟机栈（JVM Stacks）</h3><ul>
+<li>线程私有的，生命周期与线程相同</li>
+<li>虚拟机栈描述的是Java方法执行的内存模型，每一个方法执行的时候会同步创建一个栈帧（Stack Frame），用于存储<strong>局部变量表</strong>，<strong>操作数栈</strong>，<strong>动态链接</strong>，<strong>方法出口</strong>等信息。每一个方法调用直至执行完成的过程，就对应着一个栈帧从入栈到出栈的过程</li>
+<li>局部变量表存储了编译时期的各种基本数据类型，局部变量表所需的内存空间在编译时期进行分配，当进入一个方法时，这个方法需要分配多大的局部变量空间是完全确定的，不会在运行时动态改变</li>
+<li>异常：当线程申请的栈深度超过最大值，会StackOverFlow异常；当栈进行动态扩展无法申请到足够的内存空间，则会报出OOM异常</li>
+</ul>
+<h3 id="本地方法栈（Native-Method-Stacks）"><a href="#本地方法栈（Native-Method-Stacks）" class="headerlink" title="本地方法栈（Native Method Stacks）"></a>本地方法栈（Native Method Stacks）</h3><ul>
+<li>与虚拟机栈非常类似，只是调用的是native方法（HotSpot虚拟机中，会将Java虚拟机栈和本地方法栈合二为一）</li>
+<li>与虚拟机栈一样，本地方法栈也会抛出StackOverFlow和OutOfMemory异常</li>
+</ul>
+<h3 id="Java堆（Heap）"><a href="#Java堆（Heap）" class="headerlink" title="Java堆（Heap）"></a>Java堆（Heap）</h3><ul>
+<li>线程所共享，在虚拟机创建时，用来存放对象实例，几乎所有的对象实例都会在此分配内存</li>
+<li>Java堆又被称为GC堆，根据分代收集算法，Java堆还可以分为新生代和老年代；新生代还分为Eden去，FromSurvivor区，ToSurvivor区</li>
+</ul>
+<h3 id="方法区（Method-Area）"><a href="#方法区（Method-Area）" class="headerlink" title="方法区（Method Area）"></a>方法区（Method Area）</h3><ul>
+<li>用于存放被加载的类信息，常量，静态变量，编译器编译后的代码等数据</li>
+<li>和Java堆一样，方法区也不需要连续的内存区域，并且可以动态扩展，扩展失败一样会报出OutOfMemory异常</li>
+<li>对这块的回收，一般就是常量池的回收和类的卸载，一般比较难实现，HotSpot虚拟机把它当作永久代回收</li>
+<li><p>方法区逻辑上是堆的一部分，但是为了与堆进行区分，又称为非堆</p>
+</li>
+<li><h4 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h4><ul>
+<li>运行时常量池是方法区的一部分</li>
+<li>Class中的常量池会在类加载之后，被放到这个区域</li>
+<li>除了在编译期生成的常量，还允许动态生成，例如 String 类的 intern()。这部分常量也会被放入运行时常量池<br>（注）<ul>
+<li>在JDK1.7之前，HotSpot使用永久代实现方法区；HotSpot使用GC分代实现了很大的便利</li>
+<li>从JDK1.7开始，HotSpot开始移除永久代，其中符号引用被移动到Native Heap中。字符串常量和类引用被移动到Java Heap中</li>
+<li>在JDK1.8中，永久代已完全被原空间（MetaSpace）取代，元空间的本质与永久代类似，都是对JVM规范中方法区的实现，只不过元空间并不是虚拟机中，而是使用本地内存。因此在默认情况下，元空间的大小仅受本地内存大小限制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="直接内存（Direct）"><a href="#直接内存（Direct）" class="headerlink" title="直接内存（Direct）"></a>直接内存（Direct）</h3><ul>
+<li>直接内存不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但是这部分内存也是被频繁的使用，而且也会导致OutOfMemory异常</li>
+<li>在JDK1.4中新加入了NIO类，引入了一种基于管道（Channel）和缓冲区（Buffer）的I/O方式，它可以使用native函数直接分配Native函数库直接分配堆外内存，然后通过一个存储在Java堆中的DirectByteBuffer对象作为这块内存的引用进行操作，这样操作能在一定场景中显著提升性能，因为避免了在Java堆和Native堆中来回复制数据</li>
+</ul>
 
                 <hr>
                 
@@ -205,7 +239,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序计数器："><span class="toc-text">程序计数器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java栈（虚拟机栈）："><span class="toc-text">Java栈（虚拟机栈）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地方法栈："><span class="toc-text">本地方法栈：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆（GC堆）："><span class="toc-text">堆（GC堆）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法区："><span class="toc-text">方法区：</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序计数器"><span class="toc-text">程序计数器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java虚拟机栈（JVM-Stacks）"><span class="toc-text">Java虚拟机栈（JVM Stacks）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地方法栈（Native-Method-Stacks）"><span class="toc-text">本地方法栈（Native Method Stacks）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java堆（Heap）"><span class="toc-text">Java堆（Heap）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法区（Method-Area）"><span class="toc-text">方法区（Method Area）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时常量池"><span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存（Direct）"><span class="toc-text">直接内存（Direct）</span></a></li></ol>
                 </div>
             </div>
         </div>
