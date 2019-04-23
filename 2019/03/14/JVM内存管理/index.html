@@ -164,7 +164,17 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                
+                <blockquote>
+<p>Java内存模型（Java Memory Model）JMM，是一种符合内存模型规范的，屏蔽了各种硬件以及操作系统访问差异的，保证了Java程序在各种平台下对于内存的访问都能够保证效果一致的机制和规范。（jmm是jvm的一种规范，定义了jvm的内存模型。它屏蔽了各种硬件和操作系统的访问差异，不像c那样直接访问硬件内存，相对安全很多，它的主要目的是解决由于多线程通过共享内存进行通信时，存在的本地内存数据不一致、编译器会对代码指令重排序、处理器会对代码乱序执行等带来的问题。可以保证并发编程场景中的原子性、可见性和有序性。）</p>
+</blockquote>
+<p>JMM管理的内存分为5大数据区（运行时数据区）：</p>
+<h3 id="程序计数器："><a href="#程序计数器：" class="headerlink" title="程序计数器："></a>程序计数器：</h3><p>程序计数器是一块很小的内存空间，可以是线程私有的，可以看作为当先的行号指令器。这块内存区域是虚拟机中唯一一块没有OOM的区域。</p>
+<h3 id="Java栈（虚拟机栈）："><a href="#Java栈（虚拟机栈）：" class="headerlink" title="Java栈（虚拟机栈）："></a>Java栈（虚拟机栈）：</h3><p>线程私有的，栈描述的是Java方法的内存模型。每一个方法被执行的时候，都会创建出一个一个栈针来存储局部变量表，操作栈，动态链接，方法出口等信息。每一个方法的调用都是在虚拟机栈中从入栈到出栈的过程。<br>栈帧: 只用来存储数据和部分过程结果的数据结构<br>栈针的位置：内存 -&gt; 运行时数据区 -&gt; 某一个线程对应的虚拟机栈<br>栈针大小的确定：在编译时期确定，不受运行时数据的影响<br>平时所说的栈一般指的是局部变量表的部分。局部表量表：一片连续的内存空间，用来存放方法参数，以及方法内定义的局部变量。存放着编译器已知的数据类型（八大基本数据类型，对象引用（Reference类型），ReturnAddress类型）。他的最小的局部变量空间是Slot，虚拟机没有指明Slot的大小，但在jvm中，long和double类型数据明确规定为64位，这两个类型占2个Slot，其它基本类型固定占用1个Slot。<br>Reference类型：与基本类型不同的是，它不等同本身，即使是String，内部也是char数组实现，它可能是指向一个对象的起始位置的指针，也可能是指向对象的一个句柄或者是其他与该对象有关的位置<br>ReturnAddress类型：指向一条字节码的指令地址，<br>需要注意的是，局部变量表所需要的内存空间在编译期完成分配，当进入一个方法时，这个方法在栈中需要分配多大的局部变量空间是完全确定的，在方法运行期间不会改变局部变量表大小。<br>Java虚拟机栈可能会出现的两种异常：<br>1.请求的栈深度大于虚拟机所允许的栈的深度，StackOverFlowError异常<br>2.虚拟机栈空间可以动态扩展，当动态扩展无法申请到足够的空间的时候，会报OutOfMemory异常</p>
+<h3 id="本地方法栈："><a href="#本地方法栈：" class="headerlink" title="本地方法栈："></a>本地方法栈：</h3><p>本地方法栈和Java虚拟机栈的职责类似，但是本地方法栈是用于调用虚拟机使用到的native方法，可能是底层调用到的c或c++代码。</p>
+<h3 id="堆（GC堆）："><a href="#堆（GC堆）：" class="headerlink" title="堆（GC堆）："></a>堆（GC堆）：</h3><p>堆是Jvm管理的内存中的占比最大的一块，是线程共享的，所以所线程执行的时候，也要注意同步机制。<br>Java虚拟机规范对于这一块的描述是：所有的对象实例及数组，都需要在堆上分配内存，</p>
+<h3 id="方法区："><a href="#方法区：" class="headerlink" title="方法区："></a>方法区：</h3><p>方法区同堆一样，也是线程共享的一块区域，为了区分堆，也称为非堆。用于存储已经被虚拟机加载的类信息，常量，静态变量。<br>运行时常量池：是方法区的一部分，class文件除了具有类的字段，接口，方法等描述信息之外，还有常量池用于存放编译器生成的各种字面量以及符号引用。</p>
+<p>jdk8真正开始废弃永久代，而使用元空间(Metaspace)</p>
+
                 <hr>
                 
 
@@ -195,7 +205,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序计数器："><span class="toc-text">程序计数器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java栈（虚拟机栈）："><span class="toc-text">Java栈（虚拟机栈）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本地方法栈："><span class="toc-text">本地方法栈：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆（GC堆）："><span class="toc-text">堆（GC堆）：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法区："><span class="toc-text">方法区：</span></a></li></ol>
                 </div>
             </div>
         </div>
