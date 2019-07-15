@@ -176,7 +176,9 @@
 <p>Kafka的ISR的管理最终都会反馈到ZooKeeper节点上，具体位置为：/brokers/topics/[topic]/partitions/[partition]/state<br>目前，有两个地方会对这个ZooKeeper的节点进行维护。</p>
 <ul>
 <li>Controller来维护：Kafka集群中的其中一个Broker会被选举为Controller，主要负责Partition管理和副本状态管理，也会执行类似于重分配partition之类的管理任务。在符合某些特定条件下，Controller下的LeaderSelector会选举新的leader，ISR和新的leader_epoch及controller_epoch写入ZooKeeper的相关节点中。同时发起LeaderAndIsrRequest通知所有的replicas。</li>
-<li>leader来维护：leader有单独的线程定期检测ISR中follower是否脱离ISR，如果发现ISR变化，则会将新的ISR的信息返回到ZooKeeper的相关节点中。<h2 id="Ack机制：数据可靠性和持久性保证"><a href="#Ack机制：数据可靠性和持久性保证" class="headerlink" title="Ack机制：数据可靠性和持久性保证"></a>Ack机制：数据可靠性和持久性保证</h2></li>
+<li>leader来维护：leader有单独的线程定期检测ISR中follower是否脱离ISR，如果发现ISR变化，则会将新的ISR的信息返回到ZooKeeper的相关节点中。</li>
+</ul>
+<h2 id="Ack机制：数据可靠性和持久性保证"><a href="#Ack机制：数据可靠性和持久性保证" class="headerlink" title="Ack机制：数据可靠性和持久性保证"></a>Ack机制：数据可靠性和持久性保证</h2><ul>
 <li>request.required.acks=1：默认情况，leader写本地日志成功，则返回客户端成功。</li>
 <li>request.required.acks=0：不需要leader返回消息，这种情况吞吐量最高，可靠性最低。</li>
 <li>request.required.acks=-1（all）：所有的replica写成功，返回客户端成功。吞吐量最低，可靠性最高。<br>（min.insync.replicas这个参数用于设定ISR中的最小副本数，默认值为1，当且仅当request.required.acks参数设置为-1时，此参数才生效。）</li>
