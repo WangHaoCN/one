@@ -1,85 +1,66 @@
+
 <!DOCTYPE html>
-<html>
-  <head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    
-    <title>JVM垃圾回收 | Wang Hao</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    
-    
-      <link rel="icon" href="/me/favicon.png">
-    
-
-    <link rel="stylesheet" href="/me/css/style.css">
-
-    <link rel="stylesheet" href="/me/js/google-code-prettify/tomorrow-night-eighties.min.css">
-
-  </head>
-
-  <body>
-</body></html>
-<header>
-	<a id="logo" href="/" title="Wang Hao">
-	<img src="/me/favicon.png" alt="Wang Hao"></a>
-	
-	
-		<!--搜索栏-->
-		<i class="js-toggle-search iconfont icon-search"></i>
-
-
-<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
-	<div class="search-form__inner">
-		<div>
-			<i class="iconfont icon-search"></i>
-			<input class="text-input" placeholder="Enter Key..." type="search">
-		</div>
-	</div>
-</form>
-	
-
-	
-		<!--侧边导航栏-->
-		<a id="nav-toggle" href="#"><span></span></a>
-
-<nav>
-	<div class="menu-top-container">
-		<ul id="menu-top" class="menu">
-			
-				
-				<li class="current-menu-item">
-					<a href="http://weibo.com/" target="_blank">Weibo</a>
-				</li>
-			
-		</ul>
-	</div>
-</nav>
-	
-
-</header>
-<div class="m-header ">
-	<section id="hero1" class="hero">
-		<div class="inner">
-		</div>
-	</section>
-	
-		<figure class="top-image" data-enable="true"></figure>
-	
+<html lang="" class="loading">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>JVM垃圾回收 - Wang Hao</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate">
+    <meta name="keywords" content="WangHao,"> 
+    <meta name="description" content="垃圾收集算法标记-清除算法（Mark-Sweep）首先，对将要回收的对象进行标记工作，标记出所有要被回收的对象。然后统一回收被标记的对象。缺点：标记与清除的效率都不是很高。 2.清除后产生大量的内存,"> 
+    <meta name="author" content="Wang Hao"> 
+    <link rel="alternative" href="atom.xml" title="Wang Hao" type="application/atom+xml"> 
+    <link rel="icon" href="/me/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/me/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+</html>
+<body class="loading">
+    <span id="config-title" style="display:none">Wang Hao</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" data-url="http://wanghaocn.coding.me"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">JVM垃圾回收</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
 </div>
 
-<!--文章列表-->
-<div class="wrapper">
-  
-    <!--文章-->
-<article>
-	
-  
-    <h1 class="post-title" itemprop="name">
-      JVM垃圾回收
-    </h1>
-  
+    <div class="section">
+        <div class="article">
+    <div class="main">
+        <h1 class="title">JVM垃圾回收</h1>
+        <div class="stuff">
+            <span>三月 13, 2019</span>
+            
 
-	<div class="post-body mb">
-		<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><p>首先，对将要回收的对象进行标记工作，标记出所有要被回收的对象。然后统一回收被标记的对象。<br><strong><em>缺点</em></strong>：标记与清除的效率都不是很高。 2.清除后产生大量的内存碎片，空间碎片太多会导致在分配大对象时无法找到足够大的连续内存，从而不得不触发另一次垃圾回收动作。</p>
+        </div>
+        <div class="content markdown">
+            <h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><p>首先，对将要回收的对象进行标记工作，标记出所有要被回收的对象。然后统一回收被标记的对象。<br><strong><em>缺点</em></strong>：标记与清除的效率都不是很高。 2.清除后产生大量的内存碎片，空间碎片太多会导致在分配大对象时无法找到足够大的连续内存，从而不得不触发另一次垃圾回收动作。</p>
 <h3 id="复制算法（Copying）"><a href="#复制算法（Copying）" class="headerlink" title="复制算法（Copying）"></a>复制算法（Copying）</h3><p>将内存按照容量分成大小相等的两块，每次只使用其中的一块。<br>当这一块内存用完了，就将还存活的对象复制到另一块上，再将已经使用过的内存空间一次性清理掉。<br>商用虚拟机都采用这种算法回收新生代的对象。因为新生代的对象每次回收都基本上只有 10% 左右的对象存活，需要复制的对象少，效率高。<br><strong><em>优点</em></strong>：对整个半区进行内存回收，效率高，不会产生内存碎片<br><strong><em>缺点</em></strong>：1.需要提前预留内存空间，存在一定的内存浪费;2.存活的对象比较多时，需要复制的对象较多，效率会比较低。</p>
 <h3 id="标记-整理算法（Marking-Compact）"><a href="#标记-整理算法（Marking-Compact）" class="headerlink" title="标记-整理算法（Marking-Compact）"></a>标记-整理算法（Marking-Compact）</h3><p>将所有的存活的对象向内存的一段移动，直接清除掉边界以外的内存。<br><strong><em>优点</em></strong>：消除了标记清除中内存分散与碎片的问题，也消除了复制算法中内存减半的代价。<br><strong><em>缺点</em></strong>：效率低下，需要标记存活的对象，还需要标记存活对象的引用地址。效率上低于复制算法。</p>
 <h3 id="分代收集算法（Gennerational-Collection）"><a href="#分代收集算法（Gennerational-Collection）" class="headerlink" title="分代收集算法（Gennerational Collection）"></a>分代收集算法（Gennerational Collection）</h3><p>根据对象的生命周期的不同，将内存划分为不同的几块，对不同周期的对象进行不同的收集算法。<br><strong><em>新生代</em></strong>：每次回收的时候都会有大量的对象被收集，采用复制算法。<br><strong><em>老年代</em></strong>：对象存活率高，采用标记清理或者标记整理算法进行收集。</p>
@@ -98,122 +79,90 @@
 <p><strong><em>横跨整个堆内存</em></strong>：G1收集器将整个Java堆划分为多个大小相等的独立区域（Region）。虽然还保留了新生代和老年代的概念，但是新生代和老年代不是物理隔离的了，而是一部分（Region）的集合（不是必须连续的）。<br><strong><em>建立可预测的时间集合</em></strong>：G1收集器可以有计划的避免在整个Java堆中进行全区域的垃圾回收。G1会跟踪每一个Region中的垃圾堆积的价值大小（回收所得到的空间大小以及回收所需要的经验值），并在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值较大的Region。保证了G1可以在有限的时间范围内，获得尽可能高的收集效率。<br><strong><em>避免全堆扫描（Remembered Set）</em></strong>：G1把Java堆分成多个Region，就是化零为整。但是Region不可能是独立的，一个对象分配在某一个Region中，可以与整个Java堆的任意一个对象发生引用关系。在做可达性分析进行对象的检活的时候，需要扫描整个Java堆才能保证其准确性，这是对GC效率的极大损害。为了避免全堆扫描的发生，虚拟机为G1中的每一个Region堆都维护了一个与之对应的“Rememberes Set”。虚拟机发现在对Reference类型的对象进行写操作时，会产生一个Write Barrier暂时中断写操作，检查Reference所引用的对象知否处于不同的Region中（在分代收集中，就是检查是否老年代中的对象引用了新生代的对象），如果是，那么就使用CardTable把相关引用信息记录到引用对象所属的Region中的Remembered Set中。在进行垃圾回收的时候，GC Roots中加入Remembered Set中即可保证不对全堆进行扫面也可以保证不会有遗漏。</p>
 <p>如果不计算Remembered Set的执行过程，G1的工作流程大致可以分为以下几个流程：<br>1.<strong><em>初始标记</em></strong>（Initial Marking）：仅仅标记一下GC Roots所能关联到的对象，并且修改TAMS（Nest Top Mark Start）的值，确保下一阶段用户程序并发运行时，能在正确的Region中创建对象，此阶段需要Stop The World，但是停顿时间很短。<br>2.<strong><em>并发标记</em></strong>（Concurrent Marking）：从GC Roots中，开始对堆中的对象开始进行可达性分析，找到存活的对象，这个阶段耗时比较长，但是可以与用户线程间并行执行。<br>3.<strong><em>最终标记</em></strong>（Final Marking）：为了修正在并发标记期间的用户线程执行所产生的变动，虚拟机在并发标记期间，将对象变化记录在Remembered Set Logs中，最终标记阶段需要把Remembered Set Logs的数据合并到Remembered Set中，这阶段需要Stop The World，但是可以与用户线程并发执行。<br>4.<strong><em>筛选回收</em></strong>（Live Data Counting And Evacuation）：对所有Region中的回收价值和成本进行排序，根据用户期望的停顿时间制定回收计划，此阶段也可以做到与用户线程并发执行，但是因为只会回收一部分Region，时间是用户可控制的，而且停顿用户线程可以大幅提高收集效率。</p>
 
-	</div>
-	<div class="meta split">
-		
-			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
-		
-		<time class="post-date" datetime="2019-03-13T12:05:19.000Z" itemprop="datePublished">2019-03-13</time>
-	</div>
-</article>
-
-<!--评论-->
-
-	
-<div class="ds-thread" data-thread-key="JVM垃圾回收" data-title="JVM垃圾回收" data-url="http://wanghaocn.coding.me/me/2019/03/13/JVM垃圾回收/"></div>
-<script type="text/javascript">
-
-var duoshuoQuery = {short_name:"yumemor"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0]
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-</script>
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        <li title="0" data-url="http://link.hhtjim.com/163/5146554.mp3"></li>
+                    
+                        <li title="1" data-url="http://link.hhtjim.com/qq/001faIUs4M2zna.mp3"></li>
+                    
+                </ul>
+            
+        </div>
+        
+    <div id="gitalk-container" class="comment link" data-ae="false" data-ci="" data-cs="" data-r="" data-o="" data-a="" data-d="false">查看评论</div>
 
 
-  
+    </div>
+    
 </div>
 
 
-  <svg id="bigTriangleColor" width="100%" height="40" viewbox="0 0 100 102" preserveaspectratio="none">
-    <path d="M0 0 L50 100 L100 0 Z"/>
-  </svg>
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/me/js/plugin.js"></script>
+<script src="/me/js/diaspora.js"></script>
+<link rel="stylesheet" href="/me/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/me/photoswipe/default-skin/default-skin.css">
+<script src="/me/photoswipe/photoswipe.min.js"></script>
+<script src="/me/photoswipe/photoswipe-ui-default.min.js"></script>
 
-  
-
-
-  <div class="wrapper"></div>
-
-
-
-
-
-<div class="fat-footer">
-	<div class="wrapper">
-		<div class="layout layout--center">
-			<div class="layout__item palm-mb">
-				<div class="media">
-					<img class="headimg" src="https://imgchr.github.la/steve.jpeg" alt="Wang Hao">
-					<div class="media__body">
-						<h4>justpsvm</h4>
-						<p class="site-description">Stay Hungry,Stay Foolish.</p>
-					</div>
-				</div>
-				<div class="author-contact">
-					<ul>
-						
-							
-							<li>
-				        		<a href="http://weibo.com/" target="_blank">
-				        			
-				        				<i class="iconfont icon-weibo"></i>
-				        			
-				        		</a>
-				        	</li>
-						
-							
-							<li>
-				        		<a href="https://github.com/" target="_blank">
-				        			
-				        				<i class="iconfont icon-github"></i>
-				        			
-				        		</a>
-				        	</li>
-						
-							
-							<li>
-				        		<a href="https://www.zhihu.com/" target="_blank">
-				        			
-										<i class="iconfont icon-zhihu"></i>
-				        			
-				        		</a>
-				        	</li>
-						
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<footer class="footer" role="contentinfo">
-	<div class="wrapper wrapper--wide split split--responsive">
-		
-			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
-		
-		<span>Theme by <a href="http://github.com/justpsvm">justpsvm</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
-	</div>
-</footer>
 
-	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
-	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
-	<script src="/me/js/lib.js"></script>
-	<script src="/me/js/google-code-prettify/prettify.js"></script>
-	<script src="/me/js/module.js"></script>
-	<script src="/me/js/script.js"></script>
-	
-		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-	
-	<script type="text/javascript">
-		//代码高亮
-		$(document).ready(function(){
-	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
-   			prettyPrint();
-		});
-	</script>
-	
 
+
+</html>
