@@ -1,170 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<html>
+  <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="Wang Hao" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        JVM垃圾回收｜undefined
-        
-    </title>
+    
+    <title>JVM垃圾回收 | Wang Hao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/me/favicon.png">
+    
 
-    <link rel="canonical" href="http://wanghaocn.coding.me/me/2019/03/13/JVM垃圾回收/">
+    <link rel="stylesheet" href="/me/css/style.css">
 
-    <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/me/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/me/js/google-code-prettify/tomorrow-night-eighties.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/me/css/blog-style.css">
+  </head>
 
-    <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/me/css/syntax.css">
-</head>
+  <body>
+</body></html>
+<header>
+	<a id="logo" href="/" title="Wang Hao">
+	<img src="/me/favicon.png" alt="Wang Hao"></a>
+	
+	
+		<!--搜索栏-->
+		<i class="js-toggle-search iconfont icon-search"></i>
 
-<style>
 
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/me/">
-                <span class="brand-logo">
-                    Wang Hao
-                </span>
-                's Blog
-            </a>
-        </div>
+<form class="js-search search-form search-form--modal" method="get" action="http://gushi.li" role="search">
+	<div class="search-form__inner">
+		<div>
+			<i class="iconfont icon-search"></i>
+			<input class="text-input" placeholder="Enter Key..." type="search">
+		</div>
+	</div>
+</form>
+	
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/me/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- /.container -->
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
+	
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
-
-<!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img" src="undefinedhttps://raw.githubusercontent.com/zhenlanghuo/zhenlanghuo.github.io/master/image/pexels-photo-251225_1080_c.jpg">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('https://raw.githubusercontent.com/zhenlanghuo/zhenlanghuo.github.io/master/image/pexels-photo-251225_1080_c.jpgundefined')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>JVM垃圾回收</h1>
-                    
-                    <span class="meta">
-                         作者 Wang Hao
-                        <span>
-                          日期 2019-03-13
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="post-title-haojen">
-        <span>
-            JVM垃圾回收
-        </span>
-    </div>
 </header>
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable="true"></figure>
+	
+</div>
 
-<!-- Post Content -->
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
 <article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><p>首先，对将要回收的对象进行标记工作，标记出所有要被回收的对象。然后统一回收被标记的对象。<br><strong><em>缺点</em></strong>：标记与清除的效率都不是很高。 2.清除后产生大量的内存碎片，空间碎片太多会导致在分配大对象时无法找到足够大的连续内存，从而不得不触发另一次垃圾回收动作。</p>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      JVM垃圾回收
+    </h1>
+  
+
+	<div class="post-body mb">
+		<h1 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h1><h3 id="标记-清除算法（Mark-Sweep）"><a href="#标记-清除算法（Mark-Sweep）" class="headerlink" title="标记-清除算法（Mark-Sweep）"></a>标记-清除算法（Mark-Sweep）</h3><p>首先，对将要回收的对象进行标记工作，标记出所有要被回收的对象。然后统一回收被标记的对象。<br><strong><em>缺点</em></strong>：标记与清除的效率都不是很高。 2.清除后产生大量的内存碎片，空间碎片太多会导致在分配大对象时无法找到足够大的连续内存，从而不得不触发另一次垃圾回收动作。</p>
 <h3 id="复制算法（Copying）"><a href="#复制算法（Copying）" class="headerlink" title="复制算法（Copying）"></a>复制算法（Copying）</h3><p>将内存按照容量分成大小相等的两块，每次只使用其中的一块。<br>当这一块内存用完了，就将还存活的对象复制到另一块上，再将已经使用过的内存空间一次性清理掉。<br>商用虚拟机都采用这种算法回收新生代的对象。因为新生代的对象每次回收都基本上只有 10% 左右的对象存活，需要复制的对象少，效率高。<br><strong><em>优点</em></strong>：对整个半区进行内存回收，效率高，不会产生内存碎片<br><strong><em>缺点</em></strong>：1.需要提前预留内存空间，存在一定的内存浪费;2.存活的对象比较多时，需要复制的对象较多，效率会比较低。</p>
 <h3 id="标记-整理算法（Marking-Compact）"><a href="#标记-整理算法（Marking-Compact）" class="headerlink" title="标记-整理算法（Marking-Compact）"></a>标记-整理算法（Marking-Compact）</h3><p>将所有的存活的对象向内存的一段移动，直接清除掉边界以外的内存。<br><strong><em>优点</em></strong>：消除了标记清除中内存分散与碎片的问题，也消除了复制算法中内存减半的代价。<br><strong><em>缺点</em></strong>：效率低下，需要标记存活的对象，还需要标记存活对象的引用地址。效率上低于复制算法。</p>
 <h3 id="分代收集算法（Gennerational-Collection）"><a href="#分代收集算法（Gennerational-Collection）" class="headerlink" title="分代收集算法（Gennerational Collection）"></a>分代收集算法（Gennerational Collection）</h3><p>根据对象的生命周期的不同，将内存划分为不同的几块，对不同周期的对象进行不同的收集算法。<br><strong><em>新生代</em></strong>：每次回收的时候都会有大量的对象被收集，采用复制算法。<br><strong><em>老年代</em></strong>：对象存活率高，采用标记清理或者标记整理算法进行收集。</p>
@@ -183,166 +98,122 @@
 <p><strong><em>横跨整个堆内存</em></strong>：G1收集器将整个Java堆划分为多个大小相等的独立区域（Region）。虽然还保留了新生代和老年代的概念，但是新生代和老年代不是物理隔离的了，而是一部分（Region）的集合（不是必须连续的）。<br><strong><em>建立可预测的时间集合</em></strong>：G1收集器可以有计划的避免在整个Java堆中进行全区域的垃圾回收。G1会跟踪每一个Region中的垃圾堆积的价值大小（回收所得到的空间大小以及回收所需要的经验值），并在后台维护一个优先列表，每次根据允许的收集时间，优先回收价值较大的Region。保证了G1可以在有限的时间范围内，获得尽可能高的收集效率。<br><strong><em>避免全堆扫描（Remembered Set）</em></strong>：G1把Java堆分成多个Region，就是化零为整。但是Region不可能是独立的，一个对象分配在某一个Region中，可以与整个Java堆的任意一个对象发生引用关系。在做可达性分析进行对象的检活的时候，需要扫描整个Java堆才能保证其准确性，这是对GC效率的极大损害。为了避免全堆扫描的发生，虚拟机为G1中的每一个Region堆都维护了一个与之对应的“Rememberes Set”。虚拟机发现在对Reference类型的对象进行写操作时，会产生一个Write Barrier暂时中断写操作，检查Reference所引用的对象知否处于不同的Region中（在分代收集中，就是检查是否老年代中的对象引用了新生代的对象），如果是，那么就使用CardTable把相关引用信息记录到引用对象所属的Region中的Remembered Set中。在进行垃圾回收的时候，GC Roots中加入Remembered Set中即可保证不对全堆进行扫面也可以保证不会有遗漏。</p>
 <p>如果不计算Remembered Set的执行过程，G1的工作流程大致可以分为以下几个流程：<br>1.<strong><em>初始标记</em></strong>（Initial Marking）：仅仅标记一下GC Roots所能关联到的对象，并且修改TAMS（Nest Top Mark Start）的值，确保下一阶段用户程序并发运行时，能在正确的Region中创建对象，此阶段需要Stop The World，但是停顿时间很短。<br>2.<strong><em>并发标记</em></strong>（Concurrent Marking）：从GC Roots中，开始对堆中的对象开始进行可达性分析，找到存活的对象，这个阶段耗时比较长，但是可以与用户线程间并行执行。<br>3.<strong><em>最终标记</em></strong>（Final Marking）：为了修正在并发标记期间的用户线程执行所产生的变动，虚拟机在并发标记期间，将对象变化记录在Remembered Set Logs中，最终标记阶段需要把Remembered Set Logs的数据合并到Remembered Set中，这阶段需要Stop The World，但是可以与用户线程并发执行。<br>4.<strong><em>筛选回收</em></strong>（Live Data Counting And Evacuation）：对所有Region中的回收价值和成本进行排序，根据用户期望的停顿时间制定回收计划，此阶段也可以做到与用户线程并发执行，但是因为只会回收一部分Region，时间是用户可控制的，而且停顿用户线程可以大幅提高收集效率。</p>
 
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/me/2019/03/30/Java学-mian-习-shi-路-zhi-线-nan/" data-toggle="tooltip" data-placement="top" title="Java学(mian)习(shi)路(zhi)线(nan)">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/me/2019/03/05/设计模式-6大设计原则/" data-toggle="tooltip" data-placement="top" title="设计模式-6大设计原则">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#垃圾收集算法"><span class="toc-text">垃圾收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-清除算法（Mark-Sweep）"><span class="toc-text">标记-清除算法（Mark-Sweep）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#复制算法（Copying）"><span class="toc-text">复制算法（Copying）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标记-整理算法（Marking-Compact）"><span class="toc-text">标记-整理算法（Marking-Compact）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分代收集算法（Gennerational-Collection）"><span class="toc-text">分代收集算法（Gennerational Collection）</span></a></li></ol></li></ol><li class="toc-item toc-level-1"><a class="toc-link" href="#七种垃圾回收器"><span class="toc-text">七种垃圾回收器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#新生代收集器"><span class="toc-text">新生代收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial收集器"><span class="toc-text">Serial收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ParNew收集器"><span class="toc-text">ParNew收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Scavenge收集器"><span class="toc-text">Parallel Scavenge收集器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#老年代收集器"><span class="toc-text">老年代收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Serial-Old收集器"><span class="toc-text">Serial Old收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parallel-Old收集器"><span class="toc-text">Parallel Old收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CMS收集器"><span class="toc-text">CMS收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#G1收集器"><span class="toc-text">G1收集器</span></a></li></ol></li></ol></li>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2019-03-13T12:05:19.000Z" itemprop="datePublished">2019-03-13</time>
+	</div>
 </article>
 
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="JVM垃圾回收" data-title="JVM垃圾回收" data-url="http://wanghaocn.coding.me/me/2019/03/13/JVM垃圾回收/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewbox="0 0 100 102" preserveaspectratio="none">
+    <path d="M0 0 L50 100 L100 0 Z"/>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
 
 
 
 
 
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src="https://imgchr.github.la/steve.jpeg" alt="Wang Hao">
+					<div class="media__body">
+						<h4>justpsvm</h4>
+						<p class="site-description">Stay Hungry,Stay Foolish.</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
-                
-                
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; Wang Hao 2020
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
-                </p>
-
-            </div>
-        </div>
-    </div>
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+		<span>Theme by <a href="http://github.com/justpsvm">justpsvm</a>. Powered by <a href="http://hexo.io">Hexo</a></span>
+	</div>
 </footer>
 
-<!-- jQuery -->
-<script src="/me/js/jquery.min.js"></script>
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/me/js/lib.js"></script>
+	<script src="/me/js/google-code-prettify/prettify.js"></script>
+	<script src="/me/js/module.js"></script>
+	<script src="/me/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type="text/javascript">
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/me/js/bootstrap.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/me/js/blog.js"></script>
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://wanghaocn.coding.me/me/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
-    })
-</script>
-
-
-
-<!-- Google Analytics -->
-
-
-
-<!-- Baidu Tongji -->
-
-
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
-
-  _st('install','','2.0.0');
-</script>
-
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
-</body>
-
-</html>
