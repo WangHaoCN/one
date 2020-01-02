@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://wanghaocn.coding.me/me/archives/2019/07/">
+    <link rel="canonical" href="http://wanghaocn.coding.me/me/archives/2020/01/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/me/css/bootstrap.min.css">
@@ -144,21 +144,18 @@
 
 
 <div class="post-preview " style="background-image: url('')">
-    <a href="/me/2019/07/15/Kafka数据一致性/">
+    <a href="/me/2020/01/02/JUC专题-生产者-消费者问题/">
         <h2 class="post-title">
-            Kafka数据一致性
+            JUC专题-生产者/消费者问题
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-15
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-02
         </p>
         
         <div class="post-content-preview">
             <p>
-                
-谈及可靠性，最常规、最有效的策略就是“副本（replication）机制”，Kafka实现高可靠性同样采用了该策略。通过调节副本相关参数，可使Kafka在性能和可靠性之间取得平衡。
-
-
-Kafka文件存储机制Kafka中的消息以topic进行分类，生产者通过topic向kafka broker..
+                JUC专题-生产者/消费者问题
+所谓生产者-消费者问题，实际上主要包含了两类线程，一种是生产者线程用于生产数据，另一种是消费者线程用于消费数据，为了解耦生产者和消费者的关系，通常会采用共享的数据区域。生产者生产数据之后直接放置在共享数据区中，并不需要关心消费者的行为；而消费者只需要从共享数据区中..
             </p>
         </div>
     </a>
